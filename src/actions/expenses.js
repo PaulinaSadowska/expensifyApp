@@ -1,7 +1,7 @@
 import { v1 as uuid } from 'uuid'
 
 // ADD_EXPENSE
-export const addExopense = ({
+export const addExpense = ({
     description = "",
     note = "",
     amount = 0,
