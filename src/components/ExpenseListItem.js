@@ -1,10 +1,15 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { removeExpense } from '../actions/expenses'
 
-// desc, amount, createdAt
-
-export const ExpenseListItem = ({ description, amount, createdAt }) => (
+const ExpenseListItem = ({ description, amount, createdAt, id, dispatch }) => (
     <div>
         <h3>{description}</h3>
         <p>${(amount / 100).toFixed(2)} - {createdAt}</p>
+        <button onClick={() => {
+            dispatch(removeExpense({ id }))
+        }}>Remove</button>
     </div>
 );
+
+export default connect()(ExpenseListItem)

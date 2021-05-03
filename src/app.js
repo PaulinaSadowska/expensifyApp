@@ -6,7 +6,7 @@ import AppRouter from './routers/AppRouter'
 import configureStore from './store/configureStore'
 import { Provider } from 'react-redux'
 import { addExpense } from './actions/expenses'
-import { sortByAmount } from './actions/filters'
+
 const store = configureStore();
 
 const jsx = (
@@ -26,8 +26,7 @@ store.dispatch(addExpense({
     amount: 2000
 }))
 
-console.log(store.getState());
-
-setTimeout(() => {
-    store.dispatch(sortByAmount())
-}, 3000)
+store.dispatch(addExpense({
+    description: "Water bill",
+    amount: 40099
+}))
