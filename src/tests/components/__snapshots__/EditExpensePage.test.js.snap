@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render edit expense page 1`] = `
+<div>
+  Editing the expense: 
+  Credit card
+  <div>
+    <button>
+      back
+    </button>
+  </div>
+  <ExpenseForm
+    expense={
+      Object {
+        "amount": 4500,
+        "createdAt": 1135810800000,
+        "description": "Credit card",
+        "id": "3",
+        "note": "",
+      }
+    }
+    onSubmit={[Function]}
+  />
+  <button
+    onClick={[Function]}
+  >
+    Remove
+  </button>
+</div>
+`;
