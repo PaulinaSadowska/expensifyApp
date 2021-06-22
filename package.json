@@ -22,7 +22,9 @@
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.6",
     "enzyme-to-json": "^3.6.2",
+    "express": "4.15.4",
     "live-server": "1.2.1",
+    "mini-css-extract-plugin": "^1.6.0",
     "moment": "^2.29.1",
     "node-sass": "5.0.0",
     "normalize.css": "^8.0.1",
@@ -42,8 +44,7 @@
     "uuid": "^8.3.2",
     "validator": "13.5.2",
     "webpack": "5.31.2",
-    "webpack-dev-server": "3.11.2",
-    "mini-css-extract-plugin": "^1.6.0"
+    "webpack-dev-server": "3.11.2"
   },
   "devDependencies": {
     "jest": "26.6.3",
