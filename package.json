@@ -19,6 +19,7 @@
     "babel-loader": "^8.2.2",
     "css-loader": "5.2.1",
     "express": "4.15.4",
+    "firebase": "^8.7.0",
     "mini-css-extract-plugin": "^1.6.0",
     "moment": "^2.29.1",
     "node-sass": "5.0.0",
