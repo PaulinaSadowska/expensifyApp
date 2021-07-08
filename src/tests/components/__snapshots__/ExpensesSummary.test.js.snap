@@ -2,18 +2,39 @@
 
 exports[`should render expensesSummary 1`] = `
 <p>
-  Viewing 
-  3
-   expenses totalling 
-  $1,141.95
+  <h2>
+    Viewing 
+    3
+     
+    expenses
+     totalling 
+    $1,141.95
+  </h2>
 </p>
 `;
 
 exports[`should render expensesSummary for empty list 1`] = `
 <p>
-  Viewing 
-  0
-   expenses totalling 
-  $0.00
+  <h2>
+    Viewing 
+    0
+     
+    expenses
+     totalling 
+    $0.00
+  </h2>
+</p>
+`;
+
+exports[`should render expensesSummary for list with only one item 1`] = `
+<p>
+  <h2>
+    Viewing 
+    1
+     
+    expense
+     totalling 
+    $1.95
+  </h2>
 </p>
 `;
