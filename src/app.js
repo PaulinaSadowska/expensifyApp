@@ -5,9 +5,7 @@ import './styles/styles.scss';
 import AppRouter from './routers/AppRouter'
 import configureStore from './store/configureStore'
 import { Provider } from 'react-redux'
-import { addExpense } from './actions/expenses'
 import 'react-dates/lib/css/_datepicker.css';
-import './firebase/firebase'
 
 const store = configureStore();
 
@@ -18,17 +16,3 @@ const jsx = (
 );
 
 ReactDOM.render(jsx, document.getElementById('app'))
-
-store.dispatch(addExpense({
-    description: "Rent",
-    amount: 99999
-}))
-store.dispatch(addExpense({
-    description: "Cat food",
-    amount: 2000
-}))
-
-store.dispatch(addExpense({
-    description: "Water bill",
-    amount: 40099
-}))
