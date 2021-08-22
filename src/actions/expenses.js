@@ -17,8 +17,7 @@ export const startAddExpense = (expenseData = {}) => {
             createdAt = moment().valueOf()
         } = expenseData;
         const expense = { description, note, amount, createdAt }
-        database.collection("expenses").add(expense).then((ref) => {
-            console.log("saved", ref)
+        return database.collection("expenses").add(expense).then((ref) => {
             dispatch(addExpense({
                 id: ref.id,
                 ...expense

@@ -5,11 +5,11 @@ import { expenses } from '../fixtures/expenses'
 
 let addExpense, history, wrapper;
 
-beforeEach(()=> {
+beforeEach(() => {
     addExpense = jest.fn()
     history = { push: jest.fn() }
     wrapper = shallow(
-        <AddExpensePage addExpense={addExpense} history={history} />
+        <AddExpensePage startAddExpense={addExpense} history={history} />
     );
 })
 

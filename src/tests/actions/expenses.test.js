@@ -1,30 +1,59 @@
-import { addExpense, removeExpense, editExpense } from '../../actions/expenses'
+import { expect } from '@jest/globals';
+import configureMockStore from 'redux-mock-store'
+import thunk from 'redux-thunk'
+import { startAddExpense, addExpense, removeExpense, editExpense } from '../../actions/expenses'
+import { expenses } from '../fixtures/expenses'
+import database from '../../firebase/firebase'
 
-test('should add create action with default values', () => {
-    const { type, expense } = addExpense();
-    expect(type).toBe('ADD_EXPENSE');
-    expect(expense).toEqual({
-        description: "",
         note: "",
-        amount: 0,
-        id: expect.any(String),
-        createdAt: expect.any(Number)
-    })
+const createMockStore = configureMockStore([thunk]);
+
+test('should start add save default expense to database and store', (done) => {
+    const store = createMockStore({});
+    store.dispatch(startAddExpense()).then(() => {
+        const action = store.getActions()[0];
+        expect(action.expense).toStrictEqual({
+            id: expect.any(String),
+            description: '',
+            note: '',
+            amount: 0,
+            createdAt: expect.any(Number)
+        })
+        done();
+    });
+})
+
+test('should start add save expense to database and store', (done) => {
+    const store = createMockStore({});
+    const expenseData = {
+        description: 'Mouse',
+        note: "awesome",
+        amount: 30.11,
+        createdAt: 12222
+    }
+    store.dispatch(startAddExpense(expenseData)).then(() => {
+        const action = store.getActions()[0];
+        expect(action.type).toBe('ADD_EXPENSE')
+        expect(action.expense).toStrictEqual({
+            id: expect.any(String),
+            ...expenseData
+        })
+        done();
+        // fails due to https://github.com/facebook/jest/issues/8769
+        /*return database.collection("expenses")
+            .doc(action.expense.id)
+            .get()*/
+    });/*.then(() => {
+        expect(doc.data()).toBe(expenseData)
+        done();
+    })*/
 })
 
 test('should add create action with params', () => {
-    const expenseData = {
-        description: "test",
-        note: "note",
-        amount: 888,
-        createdAt: 999922
-    }
+    const expenseData = expenses[2]
     const { type, expense } = addExpense(expenseData);
     expect(type).toBe('ADD_EXPENSE');
-    expect(expense).toEqual({
-        ...expenseData,
-        id: expect.any(String)
-    })
+    expect(expense).toEqual(expenseData)
 })
 
 test('should remove create action with id', () => {
