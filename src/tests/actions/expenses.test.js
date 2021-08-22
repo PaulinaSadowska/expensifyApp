@@ -1,12 +1,25 @@
 import { expect } from '@jest/globals';
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
-import { startAddExpense, addExpense, removeExpense, editExpense } from '../../actions/expenses'
+import {
+    startAddExpense,
+    addExpense,
+    startRemoveExpense,
+    removeExpense,
+    editExpense,
+    setExpenses,
+    startSetExpenses
+} from '../../actions/expenses'
 import { expenses } from '../fixtures/expenses'
 import database from '../../firebase/firebase'
 
-        note: "",
 const createMockStore = configureMockStore([thunk]);
+
+beforeEach(() => {
+    expenses.forEach((expense) => {
+        database.collection("expenses").doc(expense.id).set(expense);
+    })
+});
 
 test('should start add save default expense to database and store', (done) => {
     const store = createMockStore({});
@@ -65,6 +78,18 @@ test('should remove create action with id', () => {
     })
 })
 
+test('should start remove item in database', (done) => {
+    const store = createMockStore({});
+    const id = expenses[0].id;
+    const action = startRemoveExpense({ id });
+    store.dispatch(action).then(() => {
+        const action = store.getActions()[0];
+        expect(action.type).toBe('REMOVE_EXPENSE')
+        expect(action.id).toBe(id)
+        done();
+    });
+})
+
 
 test('should edit create action with id and all updates', () => {
     const expectedId = 1234
@@ -79,3 +104,27 @@ test('should edit create action with id and all updates', () => {
         amount: 666
     })
 })
+
+
+test('should setup set expense action object with expenses', () => {
+    const action = setExpenses(expenses);
+    expect(action.type).toBe('SET_EXPENSES');
+    expect(action.expenses).toBe(expenses);
+})
+
+/* fails
+test('should start setup fetch expenses from firebase', (done) => {
+    const store = createMockStore({});
+    console.log("actions", actions)
+    store.dispatch(startSetExpenses()).then(() => {
+        const actions = store.getActions();
+        console.log("actions", actions)
+        const action = actions[0];
+        expect(action.type).toBe('SET_EXPENSES');
+        expect(action.expenses).toBe(expenses);
+        done();
+    }).catch(() => {
+        console.log("error")
+        done();
+    });
+})*/

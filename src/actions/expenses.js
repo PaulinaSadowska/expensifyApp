@@ -32,9 +32,49 @@ export const removeExpense = ({ id } = {}) => ({
     id
 });
 
+export const startRemoveExpense = ({ id } = {}) => {
+    return (dispatch) => {
+        return database.collection("expenses").doc(id).delete().then(() => {
+            dispatch(removeExpense({ id }))
+        });
+    };
+};
+
 // EDIT_EXPENSE
 export const editExpense = (id, updates) => ({
     type: 'EDIT_EXPENSE',
     id,
     updates
 });
+
+export const startEditExpense = (id, updates) => {
+    return (dispatch) => {
+        return database.collection("expenses").doc(id).update(updates).then(() => {
+            dispatch(editExpense(id, updates))
+        });
+    };
+};
+
+//SET_EXPENSES
+export const setExpenses = (expenses = []) => ({
+    type: 'SET_EXPENSES',
+    expenses
+});
+
+
+export const startSetExpenses = () => {
+    return (dispatch) => {
+        return database.collection("expenses").get().then((querySnapshot) => {
+            const expenses = []
+            querySnapshot.forEach((doc) => {
+                // doc.data() is never undefined for query doc snapshots
+                // console.log(doc.id, " => ", doc.data());
+                expenses.push({
+                    id: doc.id,
+                    ...doc.data()
+                })
+            });
+            dispatch(setExpenses(expenses))
+        });
+    };
+};
