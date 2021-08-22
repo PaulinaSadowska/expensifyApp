@@ -18,6 +18,11 @@ exports[`should render header (enzyme snapshot) 1`] = `
   >
     Create expense
   </NavLink>
+  <button
+    onClick={[Function]}
+  >
+    Logout
+  </button>
 </header>
 `;
 
@@ -39,5 +44,10 @@ exports[`should render header (snapshot) 1`] = `
   >
     Create expense
   </NavLink>
+  <button
+    onClick={[Function]}
+  >
+    Logout
+  </button>
 </header>
 `;

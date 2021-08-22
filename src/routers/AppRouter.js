@@ -6,7 +6,7 @@ import LoginPage from '../components/LoginPage'
 import EditExpensePage from '../components/EditExpensePage'
 import { HelpPage } from '../components/HelpPage'
 import { PageNotFound } from '../components/PageNotFound'
-import { Header } from '../components/Header'
+import Header from '../components/Header'
 
 const AppRouter = () => (
     <BrowserRouter>
