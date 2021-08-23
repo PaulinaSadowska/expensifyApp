@@ -1,15 +1,18 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { ExpenseDashboardPage } from '../components/ExpenseDashboardPage'
-import AddExpensePage from '../components/AddExpensePage'
-import LoginPage from '../components/LoginPage'
-import EditExpensePage from '../components/EditExpensePage'
-import { HelpPage } from '../components/HelpPage'
-import { PageNotFound } from '../components/PageNotFound'
-import Header from '../components/Header'
+import { Router, Route, Switch } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
+import { ExpenseDashboardPage } from '../components/ExpenseDashboardPage';
+import AddExpensePage from '../components/AddExpensePage';
+import LoginPage from '../components/LoginPage';
+import EditExpensePage from '../components/EditExpensePage';
+import { HelpPage } from '../components/HelpPage';
+import { PageNotFound } from '../components/PageNotFound';
+import Header from '../components/Header';
 
-const AppRouter = () => (
-    <BrowserRouter>
+export const history = createBrowserHistory()
+
+export const AppRouter = () => (
+    <Router history={history}>
         <div>
             <Header />
             <Switch>
@@ -21,7 +24,5 @@ const AppRouter = () => (
                 <Route component={PageNotFound}></Route>
             </Switch>
         </div>
-    </BrowserRouter>
+    </Router>
 );
-
-export default AppRouter;

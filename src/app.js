@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import 'normalize.css/normalize.css';
 import './styles/styles.scss';
 import { startSetExpenses } from './actions/expenses'
-import AppRouter from './routers/AppRouter'
+import { AppRouter, history } from './routers/AppRouter'
 import configureStore from './store/configureStore'
 import { Provider } from 'react-redux'
 import 'react-dates/lib/css/_datepicker.css';
@@ -17,17 +17,27 @@ const jsx = (
     </Provider>
 );
 
-ReactDOM.render(<p>Loading...</p>, document.getElementById('app'));
+let hasRendered = false;
+const renderApp = () => {
+    if (!hasRendered) {
+        ReactDOM.render(jsx, document.getElementById('app'))
+        hasRendered = true;
+    }
+}
 
-store.dispatch(startSetExpenses()).then(() => {
-    ReactDOM.render(jsx, document.getElementById('app'))
-});
+ReactDOM.render(<p>Loading...</p>, document.getElementById('app'));
 
 firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-        var uid = user.uid;
-        console.log("logged in", uid)
+        // var uid = user.uid;
+        store.dispatch(startSetExpenses()).then(() => {
+            renderApp()
+        });
+        if (history.location.pathname == "/") {
+            history.push("/dashboard")
+        }
     } else {
-        console.log("logged out", uid)
+        renderApp()
+        history.push("/")
     }
 });

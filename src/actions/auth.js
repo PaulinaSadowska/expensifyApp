@@ -18,7 +18,7 @@ export const startLogin = () => {
                 // The signed-in user info.
                 const user = result.user;
                 console.log("user", user)
-                dispatch(logIn({
+                dispatch(login({
                     user
                 }))
             }).catch((error) => {
@@ -34,6 +34,10 @@ export const startLogin = () => {
 
     };
 };
+
+export const logout = () => ({
+    type: 'LOGOUT',
+});
 
 export const startLogout = () => {
     return (dispatch) => {
