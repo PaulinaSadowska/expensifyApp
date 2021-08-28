@@ -15,7 +15,7 @@ module.exports = (env) => {
     console.log("env", env)
     console.log("isProd", isProd)
     return {
-        entry: './src/app.js',
+        entry: ['babel-polyfill', './src/app.js'],
         plugins: [
             new MiniCssExtractPlugin(),
             new webpack.DefinePlugin({
