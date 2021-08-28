@@ -12,7 +12,7 @@ test('should render header (snapshot)', () => {
 test('should render header (enzyme)', () => {
     const wrapper = shallow(<Header startLogout={() => { }} />);
     expect(wrapper.find("h1").text()).toBe("Expensify")
-    expect(wrapper.find("NavLink").length).toBe(2)
+    expect(wrapper.find("Link").length).toBe(1)
 })
 
 test('should render header (enzyme snapshot)', () => {

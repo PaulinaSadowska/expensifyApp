@@ -20,5 +20,5 @@ test('should render add expense page', () => {
 test('should submit new expense', () => {
     wrapper.find('ExpenseForm').prop('onSubmit')(expenses[0])
     expect(addExpense).toHaveBeenCalledWith(expenses[0])
-    expect(history.push).toHaveBeenCalledWith("/")
+    expect(history.push).toHaveBeenCalledWith("/dashboard")
 })
